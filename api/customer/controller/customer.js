@@ -8,15 +8,23 @@ exports.findCustomers = function (req, res, next) {
     if (req.query.name) searchParams.name = { $regex: new RegExp(`^${req.query.name}`, 'i') };
     if (req.query.kbo) searchParams.kbo = { $regex: new RegExp(`^${req.query.kbo}`, 'i') };
 
+    var countQuery = Customer.count(searchParams);
     var query = Customer.find(searchParams);
+
     query = queryHelper.handleSorting(query, req.query);
     query = queryHelper.handlePaging(query, req.query);
-    
-    query.exec(function (err, result) {
-        if (err) {
-            return next(err);
-        }
-        res.json(result);
+
+    var items;
+    var count;
+
+    query.exec().then(function(result){
+        items = result;
+        return countQuery.exec();
+    }).then(function(count){
+        res.setHeader('x-total-count', count)
+        return res.json(items);
+    }).catch(function(err){
+        return next(err);
     });
 };
 
@@ -26,7 +34,7 @@ exports.createCustomer = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        res.json(newCustomer);
+        return res.json(newCustomer);
     })
 };
 
@@ -37,9 +45,9 @@ exports.getCustomer = function (req, res, next) {
             return next(err);
         }
         if (!customer) {
-            res.status(404);
+            return res.status(404);
         }
-        res.json(customer);
+        return res.json(customer);
     });
 };
 
@@ -50,9 +58,9 @@ exports.updateCustomer = function (req, res, next) {
             return next(err);
         }
         if (!customer) {
-            res.status(404)
+            return res.status(404)
         }
-        res.json(customer);
+        return res.json(customer);
     })
 };
 

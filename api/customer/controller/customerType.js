@@ -7,6 +7,6 @@ exports.findCustomerTypes = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        res.json(result);
+        return res.json(result);
     });
 };
