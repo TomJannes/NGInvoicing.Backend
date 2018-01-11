@@ -1,5 +1,5 @@
 'use strict';
-const logger = require('../logger');
+const logger = require('../utils/logger');
 
 module.exports = function (app) {
     require('../api/customer/routes')(app);

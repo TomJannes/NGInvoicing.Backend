@@ -19,3 +19,24 @@ exports.handlePaging = function(query, params) {
     }
     return query;
 }
+
+exports.find = function(req, res, next, model, searchParams) {
+    var countQuery = model.count(searchParams);
+    var query = model.find(searchParams);
+
+    query = queryHelper.handleSorting(query, req.query);
+    query = queryHelper.handlePaging(query, req.query);
+
+    var items;
+    var count;
+
+    query.exec().then(function (result) {
+        items = result;
+        return countQuery.exec();
+    }).then(function (count) {
+        res.setHeader('x-total-count', count)
+        return res.json(items);
+    }).catch(function (err) {
+        return next(err);
+    });
+}

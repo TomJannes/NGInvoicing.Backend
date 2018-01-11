@@ -3,9 +3,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const logger = require('./logger');
+const logger = require('./utils/logger');
 const config = require('./config');
-const errorHandling = require('./errorHandling');
+const errorHandling = require('./utils/errorHandling');
 const port = process.env.PORT || 3000;
 const app = express();
 const connection = connect();
@@ -13,7 +13,7 @@ const connection = connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-require('./requestLogging')(app);
+require('./utils/requestLogging')(app);
 require('./config/routes')(app);
 
 app.use(errorHandling.logErrors);

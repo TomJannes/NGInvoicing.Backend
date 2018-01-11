@@ -1,31 +1,14 @@
 'use strict';
 
 var Customer = require('../model/customer');
-var queryHelper = require('../../../queryHelpers');
+var queryHelper = require('../../../utils/queryHelpers');
 
 exports.findCustomers = function (req, res, next) {
     var searchParams = {};
     if (req.query.name) searchParams.name = { $regex: new RegExp(`^${req.query.name}`, 'i') };
     if (req.query.kbo) searchParams.kbo = { $regex: new RegExp(`^${req.query.kbo}`, 'i') };
 
-    var countQuery = Customer.count(searchParams);
-    var query = Customer.find(searchParams);
-
-    query = queryHelper.handleSorting(query, req.query);
-    query = queryHelper.handlePaging(query, req.query);
-
-    var items;
-    var count;
-
-    query.exec().then(function(result){
-        items = result;
-        return countQuery.exec();
-    }).then(function(count){
-        res.setHeader('x-total-count', count)
-        return res.json(items);
-    }).catch(function(err){
-        return next(err);
-    });
+    return queryHelper.find(req, res, next, Customer, searchParams);
 };
 
 exports.createCustomer = function (req, res, next) {

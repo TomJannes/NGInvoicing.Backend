@@ -1,30 +1,12 @@
 'use strict';
 
 var Sku = require('../model/sku');
-var queryHelper = require('../../../queryHelpers');
+var queryHelper = require('../../../utils/queryHelpers');
 
 exports.findSkus = function (req, res, next) {
     var searchParams = {};
     if (req.query.name) searchParams.name = { $regex: new RegExp(`^${req.query.name}`, 'i') };
-
-    var countQuery = Sku.count(searchParams);
-    var query = Sku.find(searchParams);
-
-    query = queryHelper.handleSorting(query, req.query);
-    query = queryHelper.handlePaging(query, req.query);
-
-    var items;
-    var count;
-
-    query.exec().then(function(result){
-        items = result;
-        return countQuery.exec();
-    }).then(function(count){
-        res.setHeader('x-total-count', count)
-        return res.json(items);
-    }).catch(function(err){
-        return next(err);
-    });
+    return queryHelper.find(req, res, next, Sku, searchParams);
 };
 
 exports.createSku = function (req, res, next) {
@@ -70,8 +52,8 @@ exports.deleteSku = function (req, res, next) {
             return next(err);
         }
         if (!sku) {
-            res.status(404)
+            return res.status(404)
         }
-        res.json(result);
+        return res.json(result);
     })
 };
