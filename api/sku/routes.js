@@ -2,12 +2,12 @@
 module.exports = function (app) {
   var sku = require('./controller/sku');
 
-  app.route('/skus')
+  app.route('/sku')
     .get(sku.findSkus)
     .post(sku.createSku);
 
 
-  app.route('/skus/:skuId')
+  app.route('/sku/:skuId')
     .get(sku.getSku)
     .put(sku.updateSku)
     .delete(sku.deleteSku);

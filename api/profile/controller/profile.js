@@ -4,8 +4,7 @@ var Profile = require('../model/profile');
 var queryHelper = require('../../../utils/queryHelpers');
 
 exports.getProfile = function (req, res, next) {
-    var id = req.params.profileId;
-    Profile.findById(id, function (err, profile) {
+    Profile.findOne(null, function (err, profile) {
         if (err) {
             return next(err);
         }
