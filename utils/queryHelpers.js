@@ -24,8 +24,8 @@ exports.find = function(req, res, next, model, searchParams) {
     var countQuery = model.count(searchParams);
     var query = model.find(searchParams);
 
-    query = queryHelper.handleSorting(query, req.query);
-    query = queryHelper.handlePaging(query, req.query);
+    query = this.handleSorting(query, req.query);
+    query = this.handlePaging(query, req.query);
 
     var items;
     var count;

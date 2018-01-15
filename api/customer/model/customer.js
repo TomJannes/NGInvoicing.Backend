@@ -1,6 +1,6 @@
 "use strict";
 const CustomerTypeModel = require('./customerType');
-const AddressModel = require('./address');
+const AddressModel = require('./../../shared/model/address');
 const ContactModel = require('./contact');
 
 var mongoose = require('mongoose');
