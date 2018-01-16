@@ -6,6 +6,8 @@ var queryHelper = require('../../../utils/queryHelpers');
 exports.findSkus = function (req, res, next) {
     var searchParams = {};
     if (req.query.name) searchParams.name = { $regex: new RegExp(`^${req.query.name}`, 'i') };
+    if (req.query.price) searchParams.price = req.query.price;
+    if (req.query.vat) searchParams.vat = req.query.vat;
     return queryHelper.find(req, res, next, Sku, searchParams);
 };
 
