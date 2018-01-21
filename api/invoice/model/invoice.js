@@ -1,6 +1,7 @@
 'use strict';
 
 const InvoiceLineModel = require('./invoiceLine')
+const InvoiceStateModel = require('./invoiceState');
 const CustomerModel = require('./../../customer/model/customer');
 
 var mongoose = require('mongoose');
@@ -10,6 +11,7 @@ const InvoiceSchema = new Schema({
     _id: { type: Schema.ObjectId, auto: true },
     customer: CustomerModel.schema,
     number: { type: Number, required: false },
+    state: InvoiceStateModel.schema,
     invoiceDate: { type: Date, required: true },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
