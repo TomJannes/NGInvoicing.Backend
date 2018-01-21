@@ -5,8 +5,8 @@ var queryHelper = require('../../../utils/queryHelpers');
 
 exports.findInvoices = function (req, res, next) {
     var searchParams = {};
-    if (req.query.name) searchParams.name = { $regex: new RegExp(`^${req.query.name}`, 'i') };
-    if (req.query.kbo) searchParams.kbo = { $regex: new RegExp(`^${req.query.kbo}`, 'i') };
+    if (req.query.number) searchParams.number = req.query.number;
+    if (req.query['customer.name']) searchParams['customer.name'] = { $regex: new RegExp(`^${req.query['customer.name']}`, 'i') };
 
     return queryHelper.find(req, res, next, Invoice, searchParams);
 };
