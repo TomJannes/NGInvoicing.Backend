@@ -38,7 +38,7 @@ exports.generateInvoice = function (req, res, next) {
                 };
                 pdf.create(document, options)
                     .then((result) => {
-                        res.setHeader('Content-disposition', 'attachment; filename=' + document.context.data.invoice.number + '.pdf');
+                        res.setHeader('Content-Disposition', 'attachment; filename="' + document.context.data.invoice.number + '.pdf"');
                         res.setHeader('Content-type', 'application/pdf');
                         return res.send(result);
                     });
