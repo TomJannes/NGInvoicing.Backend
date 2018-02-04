@@ -24,8 +24,8 @@ const InvoiceSchema = new Schema({
 InvoiceSchema.pre('save', function (next) {
     var invoice = this;
     const invoiceYear = this.invoiceDate.getFullYear();
-    const lowerbound = invoiceYear * 1000;
-    const upperbound = (invoiceYear + 1) * 1000;
+    const lowerbound = invoiceYear * 10000;
+    const upperbound = (invoiceYear + 1) * 10000;
     this.constructor.findOne({ number: { $gt: lowerbound, $lt: upperbound } })
         .sort({createdAt: -1})
         .exec()

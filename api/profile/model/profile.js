@@ -9,7 +9,8 @@ const ProfileSchema = new Schema({
     _id: { type: Schema.ObjectId, auto: true },
     name: { type: String, required: true },
     kbo: { type: String, required: true },
-    price: { type: Number, required: true },
+    phone: { type: String, required: true },
+    iban: { type: String, required: true },
     address: AddressModel.schema
 });
 

@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .top-space {
+            margin-top: 10mm;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" style="height: 100%;">
+        <div class="row top-space">
+            <div class="col-xs-4">
+                Leverancier:
+                <br/>
+                <span style="font-weight: bold; font-size: large;">{{this.data.profile.name}}</span>
+                <br/>
+                <span>{{this.data.profile.address.street}} {{this.data.profile.address.number}} {{this.data.profile.address.bus}}</span>
+                <br/>
+                <span>{{this.data.profile.address.zip}} {{this.data.profile.address.place}}</span>
+                <br/>
+                <span>Tel: {{this.data.profile.phone}}</span>
+                <br/>
+                <span>BTW: BE{{this.data.profile.kbo}}</span>
+                <br/>
+                <span>IBAN: {{this.data.profile.iban}}</span>
+            </div>
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4">
+                Klant:
+                <br/>
+                <span style="font-weight: bold; font-size: large;">{{this.data.invoice.customer.name}}</span>
+                <br/>
+                <span>{{this.data.invoice.customer.address.street}} {{this.data.invoice.customer.address.number}} {{this.data.invoice.customer.address.bus}}</span>
+                <br/>
+                <span>{{this.data.invoice.customer.address.zip}} {{this.data.invoice.customer.address.place}}</span>
+                <br/>
+                <span>BTW: {{this.data.invoice.customer.kbo}}</span>
+            </div>
+        </div>
+        <div class="row top-space">
+            Factuurdatum: {{short this.data.invoice.invoiceDate}}
+            <br /> Factuurnr: {{this.data.invoice.number}}
+        </div>
+        <div class="row top-space">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Omschrijving</th>
+                        <th scope="col" class="text-right">Hoeveelheid</th>
+                        <th scope="col" class="text-right">Prijs</th>
+                        <th scope="col" class="text-right">Totaal</th>
+                        <th scope="col" class="text-right">BTW</th>
+                        <th scope="col" class="text-right">Totaal incl BTW</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each data.invoice.lines}}
+                    <tr>
+                        <td>{{this.sku.name}}</td>
+                        <td class="text-right">{{this.amount}}</td>
+                        <td class="text-right">{{decimals this.price}} €</td>
+                        <td class="text-right">{{decimals this.total}} €</td>
+                        <td class="text-right">{{this.vat}} %</td>
+                        <td class="text-right">{{decimals this.totalInc}} €</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td colspan="2" class="text-left">Totaal excl BTW</td>
+                        <td class="text-right">{{decimals this.data.invoice.total}} €</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="border:0px;"></td>
+                        <td colspan="2" class="text-left">Totaal BTW</td>
+                        <td class="text-right">{{decimals this.data.invoice.totalVat}} €</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="border:0px;"></td>
+                        <td colspan="2" class="text-left">Totaal incl BTW</td>
+                        <td class="text-right">{{decimals this.data.invoice.totalInc}} €</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row" style="position: absolute; bottom: 0; right: 0; width:100%">
+            <div style="border: 1px solid black; margin-left:10px; margin-right:10px; width: 95%; padding: 5px; font-size: smaller;">
+                Wij verzoeken u vriendelijk het verschuldigde bedrag binnen 30 dagen over te maken naar IBAN {{this.data.profile.iban}} <br />
+                ten name van {{this.data.profile.name}} te {{this.data.profile.address.place}} onder vermelding van het factuurnummer.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
