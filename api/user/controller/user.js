@@ -1,7 +1,9 @@
 'use strict';
 
 const User = require('../model/user');
-const passportStrategy = require('./../../../passport/strategy');
+const StrategyOptions = require('./../../../passport/strategyOptions');
+const jwt = require('jsonwebtoken');
+
 
 exports.createUser = function (req, res, next) {
     var newUser = new User(req.body);
@@ -9,7 +11,7 @@ exports.createUser = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        return res.json(newUser);
+        return res.status(200);
     })
 };
 
@@ -17,16 +19,20 @@ exports.login = function (req, res, next) {
     var password = req.body.password;
     var query = User.findOne({ email: req.body.email });
     query.exec().then(function (result) {
-        result.comparePassword(password, function (err, isMatch) {
-            if (err) throw err;
-            if (isMatch) {
-                var payload = { id: result._id };
-                var token = jwt.sign(payload, passportStrategy.secretOrKey);
-                return res.json({ token: token });
-            } else {
-                return res.status(401);
-            }
-        });
+        if (result !== null) {
+            result.comparePassword(password, function (err, isMatch) {
+                if (err) throw err;
+                if (isMatch) {
+                    var payload = { id: result._id, firstName: result.firstName, lastName: result.lastName };
+                    var token = jwt.sign(payload, StrategyOptions.secretOrKey);
+                    return res.json({ token: token });
+                } else {
+                    return res.status(401);
+                }
+            });
+        } else {
+            return res.status(401);
+        }
     }).catch(function (err) {
         return next(err);
     });

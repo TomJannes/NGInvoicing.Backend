@@ -6,11 +6,7 @@ const passportJWT = require("passport-jwt");
 const jwt = require('jsonwebtoken');
 const ExtractJwt = passportJWT.ExtractJwt;
 const Strategy = passportJWT.Strategy;
-
-exports.jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'tasmanianDevil'
-};
+//const StrategyOptions = require('./strategyOptions');
 
 module.exports = function (app) {
     passport.use(new Strategy(jwtOptions, function (jwt_payload, next) {
