@@ -6,14 +6,19 @@ const bodyParser = require('body-parser');
 const logger = require('./utils/logger');
 const config = require('./config');
 const errorHandling = require('./utils/errorHandling');
+
+const passport = require('passport');
+
 const port = process.env.PORT || 3000;
 const app = express();
 const connection = connect();
 
+require('./passport/authentication')(passport);
+app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 require('./utils/requestLogging')(app);
+
 require('./config/routes')(app);
 
 app.use(errorHandling.logErrors);

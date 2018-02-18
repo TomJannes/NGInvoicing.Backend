@@ -1,7 +1,7 @@
 'use strict';
 
 const User = require('../model/user');
-const StrategyOptions = require('./../../../passport/strategyOptions');
+const jwtConfig = require('./../../../passport/config');
 const jwt = require('jsonwebtoken');
 
 
@@ -23,8 +23,8 @@ exports.login = function (req, res, next) {
             result.comparePassword(password, function (err, isMatch) {
                 if (err) throw err;
                 if (isMatch) {
-                    var payload = { id: result._id, firstName: result.firstName, lastName: result.lastName };
-                    var token = jwt.sign(payload, StrategyOptions.secretOrKey);
+                    var payload = { id: result._id };
+                    var token = jwt.sign(payload, jwtConfig.secretOrKey);
                     return res.json({ token: token });
                 } else {
                     return res.status(401);
