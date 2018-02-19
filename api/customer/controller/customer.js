@@ -54,8 +54,8 @@ exports.deleteCustomer = function (req, res, next) {
             return next(err);
         }
         if (!customer) {
-            res.status(404)
+            return res.status(404)
         }
-        res.json(result);
+        return res.json(result);
     })
 };
