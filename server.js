@@ -6,10 +6,10 @@ const bodyParser = require('body-parser');
 const logger = require('./utils/logger');
 const config = require('./config');
 const errorHandling = require('./utils/errorHandling');
-
 const passport = require('passport');
-
 const port = process.env.PORT || 3000;
+
+require('./launchMigrations')();
 const app = express();
 const connection = connect();
 

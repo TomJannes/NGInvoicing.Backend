@@ -1,6 +1,6 @@
 'use strict';
 
 module.exports = {
-    db: 'mongodb://localhost/NGInvoicing',
-    secretOrKey: 'tasmanianDevil'
+    db: process.env.DB,
+    secretOrKey: process.env.LOGINSECRET
 };

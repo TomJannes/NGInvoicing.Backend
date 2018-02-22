@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set LOG_LEVEL=debug&& nodemon --inspect server.js",
+    "start": "set LOG_LEVEL=debug&& set DB=mongodb://localhost:27017/NGInvoicing&& set LOGINSECRET='tasmanianDevil'&& nodemon --inspect server.js",
     "mongo": "C:/PROGRA~1/MongoDB/Server/3.6/bin/mongod.exe",
     "mmcreate": "./node_modules/.bin/mm create ",
     "mm": "./node_modules/.bin/mm",
