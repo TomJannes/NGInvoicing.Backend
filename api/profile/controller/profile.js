@@ -9,7 +9,7 @@ exports.getProfile = function (req, res, next) {
             return next(err);
         }
         if (!profile) {
-            return res.status(404);
+            return res.status(404).send('Not found');
         }
         return res.json(profile);
     });
@@ -22,7 +22,7 @@ exports.updateProfile = function (req, res, next) {
             return next(err);
         }
         if (!profile) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(profile);
     })

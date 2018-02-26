@@ -10,7 +10,7 @@ exports.createUser = function (req, res, next) {
         if (err) {
             return next(err);
         }
-        return res.status(200);
+        return res.status(200).send('Ok');
     })
 };
 
@@ -26,11 +26,11 @@ exports.login = function (req, res, next) {
                     var token = jwt.sign(payload, process.env.LOGIN_SECRET);
                     return res.json({ token: token });
                 } else {
-                    return res.status(401);
+                    return res.status(401).send('Unauthorized');
                 }
             });
         } else {
-            return res.status(401);
+            return res.status(401).send('Unauthorized');
         }
     }).catch(function (err) {
         return next(err);
@@ -44,7 +44,7 @@ exports.updateUser = function (req, res, next) {
             return next(err);
         }
         if (!user) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(user);
     })

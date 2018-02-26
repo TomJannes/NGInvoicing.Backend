@@ -28,7 +28,7 @@ exports.getInvoice = function (req, res, next) {
             return next(err);
         }
         if (!invoice) {
-            return res.status(404);
+            return res.status(404).send('Not found');
         }
         return res.json(invoice);
     });
@@ -41,7 +41,7 @@ exports.updateInvoice = function (req, res, next) {
             return next(err);
         }
         if (!invoice) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(invoice);
     })

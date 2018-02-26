@@ -28,7 +28,7 @@ exports.getSku = function (req, res, next) {
             return next(err);
         }
         if (!sku) {
-            return res.status(404);
+            return res.status(404).send('Not found');
         }
         return res.json(sku);
     });
@@ -41,7 +41,7 @@ exports.updateSku = function (req, res, next) {
             return next(err);
         }
         if (!sku) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(sku);
     })
@@ -54,7 +54,7 @@ exports.deleteSku = function (req, res, next) {
             return next(err);
         }
         if (!sku) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(result);
     })

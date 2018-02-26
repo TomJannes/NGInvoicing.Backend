@@ -17,7 +17,7 @@ exports.generateInvoice = function (req, res, next) {
         })
         .then(function (result) {
             if (result[0] === null || result[1] === null) {
-                return res.status(404);
+                return res.status(404).send('Not found');
             }
             else {
                 var template = fs.readFileSync(__dirname + '/../templates/invoice-template.html', 'utf8');

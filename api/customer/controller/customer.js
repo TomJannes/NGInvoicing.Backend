@@ -28,7 +28,7 @@ exports.getCustomer = function (req, res, next) {
             return next(err);
         }
         if (!customer) {
-            return res.status(404);
+            return res.status(404).send('Not found');
         }
         return res.json(customer);
     });
@@ -41,7 +41,7 @@ exports.updateCustomer = function (req, res, next) {
             return next(err);
         }
         if (!customer) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(customer);
     })
@@ -54,7 +54,7 @@ exports.deleteCustomer = function (req, res, next) {
             return next(err);
         }
         if (!customer) {
-            return res.status(404)
+            return res.status(404).send('Not found');
         }
         return res.json(result);
     })
