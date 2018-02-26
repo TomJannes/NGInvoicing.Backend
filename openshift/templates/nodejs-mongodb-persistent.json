@@ -521,7 +521,7 @@
         "name": "LOGIN_SECRET",
         "displayName": "Login secret for auth",
         "required": true,
-        "value": "tasmaniandevil"
+        "value": "tasmanianDevil"
       },
       {
         "name": "DATABASE_USER",
