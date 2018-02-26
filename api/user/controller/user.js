@@ -1,7 +1,6 @@
 'use strict';
 
 const User = require('../model/user');
-const config = require('./../../../config');
 const jwt = require('jsonwebtoken');
 
 
@@ -24,7 +23,7 @@ exports.login = function (req, res, next) {
                 if (err) throw err;
                 if (isMatch) {
                     var payload = { id: result._id };
-                    var token = jwt.sign(payload, config.secretOrKey);
+                    var token = jwt.sign(payload, process.env.LOGIN_SECRET);
                     return res.json({ token: token });
                 } else {
                     return res.status(401);

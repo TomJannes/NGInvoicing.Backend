@@ -200,6 +200,10 @@
                   ],
                   "env": [
                     {
+                      "name": "LOGIN_SECRET",
+                      "value": "${LOGIN_SECRET}"
+                    },
+                    {
                       "name": "DATABASE_SERVICE_NAME",
                       "value": "${DATABASE_SERVICE_NAME}"
                     },
@@ -512,6 +516,12 @@
         "displayName": "Database Service Name",
         "required": true,
         "value": "mongodb"
+      },
+      {
+        "name": "LOGIN_SECRET",
+        "displayName": "Login secret for auth",
+        "required": true,
+        "value": "tasmaniandevil"
       },
       {
         "name": "DATABASE_USER",

@@ -2,7 +2,6 @@
 
 const path = require('path')
 const mm = require('mongodb-migrations');
-// const config = require('./config');
 
 module.exports = function(mongoURL) {
     var migrator =  new mm.Migrator({

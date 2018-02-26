@@ -4,7 +4,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const logger = require('./utils/logger');
-const config = require('./config');
 const errorHandling = require('./utils/errorHandling');
 const passport = require('passport');
 

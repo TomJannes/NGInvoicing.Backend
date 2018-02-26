@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set LOG_LEVEL=debug&& set DATABASE_SERVICE_NAME=mongodb&& set MONGODB_SERVICE_HOST=127.0.0.1&& set MONGODB_SERVICE_PORT=27017&& set MONGODB_DATABASE=NGInvoicing&& set MONGODB_USER=developerx&& set MONGODB_PASSWORD=test&& set LOGINSECRET='tasmanianDevil'&& nodemon --inspect server.js",
+    "start": "set LOG_LEVEL=debug&& set DATABASE_SERVICE_NAME=mongodb&& set MONGODB_SERVICE_HOST=127.0.0.1&& set MONGODB_SERVICE_PORT=27017&& set MONGODB_DATABASE=NGInvoicing&& set MONGODB_USER=developerx&& set MONGODB_PASSWORD=test&& set LOGIN_SECRET='tasmanianDevil'&& nodemon --inspect server.js",
     "mongo": "C:/PROGRA~1/MongoDB/Server/3.6/bin/mongod.exe --auth",
     "mmcreate": "./node_modules/.bin/mm create ",
     "mm": "./node_modules/.bin/mm",
